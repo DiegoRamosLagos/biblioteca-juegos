@@ -1,0 +1,56 @@
+@startuml
+
+
+class main{
++ {static} void main(String[] args)
+}
+
+
+
+
+class Controlador {
+    Jugador sesion = null
+    - List<Jugador> jugadores
+    + void iniciarSesion(String nombreUsuario)
+    + void cerrarSesion()
+    + void nuevoJugador(String email, String nombreUsuario)
+    + void agregarJuego(String nombre, String descripcion)
+    + void jugar()
+    + String datosSesionActual()
+}
+
+Class Juego{
+    - String nombre
+    - String descripcion
+    - Date fechaAdquisición
+    - Jugador jugador
+
+    + Juego(String nombre, String descripcion)
+    + String getNombre()
+    + void setNombre(String nombre)
+    + String getDescripcion()
+    + void setDescripcion(String descripcion)
+    + Date getFechaAdquisición()
+    + void setFechaAdquisición(Date fechaAdquisición)
+    + String toString()
+}
+
+class Jugador {
+    - String email
+    - String nombreUsuario
+    - List<Juego> juegos
+    + Jugador(String email, String nombreUsuario)
+    + String getEmail()
+    + void setEmail(String email)
+    + String getNombreUsuario()
+    + void setNombreUsuario(String nombreUsuario)
+    + List<Juego> getJuegos()
+    + void setJuegos(List<Juego> juegos)
+    + void agregarJuego(Juego juego)
+    + String toString()
+}
+
+Juego "*" -- "1" Jugador : pertenecer
+main --> Controlador : utilizar
+Controlador --> Jugador : manejar
+@enduml
